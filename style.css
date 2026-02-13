@@ -1,0 +1,217 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("heart-bg.jpg");
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+/* Envelope Screen */
+#envelope-container {
+  text-align: center;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#envelope {
+  width: 200px;
+  animation: pulse 1.5s infinite;
+  cursor: pointer;
+}
+
+#letter-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter-window {
+  width: 90vw;
+  max-width: 800px;
+  aspect-ratio: 3/2;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url("window.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 12px;
+  gap: 1px;
+  padding-top: 180px;
+
+  transform: scale(1.2);
+  opacity: 0;
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+
+.letter-window.open {
+  transform: scale(1);
+  opacity: 1;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 0;
+}
+
+p {
+  font-size: 40px;
+}
+
+/* Cat */
+
+.cat {
+  width: 250px;
+  margin: 10px 0;
+  transition: width 0.4s ease;
+}
+
+.letter-window.final .cat {
+  width: 180px;
+}
+
+/* buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+}
+
+.no-wrapper {
+  position: relative;
+}
+
+.btn {
+  width: 120px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.yes-btn,
+.no-btn {
+  width: 120px;
+  height: auto;
+  display: inline-block;
+}
+
+.yes-btn {
+  position: relative;
+  z-index: 2;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+.no-btn {
+  z-index: 1;
+  position: relative;
+  transition: transform 0.15s ease;
+  cursor: default;
+}
+
+.final-text {
+  font-size: 22px;
+  line-height: 1.4;
+  text-align: center;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgba(255, 240, 240, 0.5);
+  border-radius: 12px;
+}
+/* -------- Love Letter Page -------- */
+#love-letter-page {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-image: url("heart-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInLetter 1s ease forwards;
+}
+
+@keyframes fadeInLetter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.love-letter-box {
+  width: 90%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 100, 120, 0.3);
+  animation: popUp 0.8s ease;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.love-letter-box h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.love-cat {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.letter-text p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.signature {
+  margin-top: 20px;
+  font-weight: bold;
+}
+.open-letter-btn {
+  padding: 15px;
+  border-radius: 15px;
+  border-style: dashed;
+  border-color: maroon;
+  width: 150px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.open-letter-btn:hover {
+  transform: scale(1.1);
+}
