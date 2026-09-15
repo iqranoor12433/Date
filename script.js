@@ -7,10 +7,10 @@ const yesBtn = document.querySelector(".btn[alt='Yes']");
 const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
 const buttons = document.getElementById("letter-buttons");
-const finalText = document.getElementById("final-text");
+
+const finalSection = document.getElementById("final-section");
 
 // Click Envelope
-
 envelope.addEventListener("click", () => {
   envelope.style.display = "none";
   letter.style.display = "flex";
@@ -20,58 +20,38 @@ envelope.addEventListener("click", () => {
   }, 50);
 });
 
-// Logic to move the NO btn
+// Move NO button
+function moveNoButton() {
+  const buttonRect = noBtn.getBoundingClientRect();
 
-noBtn.addEventListener("mouseover", () => {
-  const min = 200;
-  const max = 200;
+  const maxX = Math.min(120, (window.innerWidth - buttonRect.width) / 2);
+  const maxY = Math.min(80, (window.innerHeight - buttonRect.height) / 2);
 
-  const distance = Math.random() * (max - min) + min;
-  const angle = Math.random() * Math.PI * 2;
+  const moveX = (Math.random() * 2 - 1) * maxX;
+  const moveY = (Math.random() * 2 - 1) * maxY;
 
-  const moveX = Math.cos(angle) * distance;
-  const moveY = Math.sin(angle) * distance;
-
-  noBtn.style.transition = "transform 0.3s ease";
+  noBtn.style.transition = "transform 0.25s ease";
   noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+}
+
+// Desktop hover
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+// Mobile touch
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveNoButton();
 });
 
-//Logic to make YES btn to grow
+// Also works with pointer interaction
+noBtn.addEventListener("pointerdown", (e) => {
+  if (e.pointerType === "touch") {
+    e.preventDefault();
+    moveNoButton();
+  }
+});
 
-// let yesScale = 1;
-
-// yesBtn.style.position = "relative";
-// yesBtn.style.transformOrigin = "center center";
-// yesBtn.style.transition = "transform 0.3s ease";
-
-// noBtn.addEventListener("click", () => {
-//   yesScale += 2;
-
-//   if (yesBtn.style.position !== "fixed") {
-//     yesBtn.style.position = "fixed";
-//     yesBtn.style.top = "50%";
-//     yesBtn.style.left = "50%";
-//     yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//   } else {
-//     yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//   }
-// });
-
-//YES is clicked
-
-// yesBtn.addEventListener("click", () => {
-//   title.textContent = "Yippeeee!";
-
-//   catImg.src = "cat_dance.gif";
-
-//   document.querySelector(".letter-window").classList.add("final");
-
-//   buttons.style.display = "none";
-
-//   finalText.style.display = "block";
-// });
-const finalSection = document.getElementById("final-section");
-
+// YES is clicked
 yesBtn.addEventListener("click", () => {
   title.textContent = "Yippeeee! 💕";
   catImg.src = "cat_dance.gif";
@@ -79,6 +59,7 @@ yesBtn.addEventListener("click", () => {
   buttons.style.display = "none";
   finalSection.style.display = "block";
 });
+
 // Open Love Letter Button
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("open-letter-btn")) {

@@ -1,65 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
-  height: 100vh;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-image: url("heart-bg.jpg");
+  background-size: cover;
+  background-position: center;
   font-family: "Pixelify Sans", sans-serif;
+  overflow: hidden;
 }
 
 /* Envelope Screen */
+
 #envelope-container {
   text-align: center;
   cursor: pointer;
+  padding: 20px;
+}
+
+#envelope-container p {
+  font-size: clamp(22px, 4vw, 40px);
+  margin: 15px 0 0;
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
 #envelope {
-  width: 200px;
+  width: min(200px, 55vw);
+  max-width: 200px;
   animation: pulse 1.5s infinite;
   cursor: pointer;
 }
+
+/* Letter Screen */
 
 #letter-container {
   display: none;
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
+  padding: 15px;
+  overflow: hidden;
 }
 
 .letter-window {
-  width: 90vw;
-  max-width: 800px;
-  aspect-ratio: 3/2;
-  padding: 20px 20px 0 20px;
+  width: min(90vw, 800px);
+  height: auto;
+  min-height: 55vh;
+  aspect-ratio: 3 / 2;
+
+  padding: 150px 30px 30px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+
   background-image: url("window.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+
   border-radius: 12px;
-  gap: 1px;
-  padding-top: 180px;
+  gap: 8px;
 
   transform: scale(1.2);
   opacity: 0;
+
   transition:
     transform 0.6s ease,
     opacity 0.6s ease;
@@ -71,32 +105,34 @@ body {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: clamp(20px, 3.5vw, 30px);
+  line-height: 1.2;
   margin: 0;
-}
-
-p {
-  font-size: 40px;
+  max-width: 90%;
 }
 
 /* Cat */
 
 .cat {
-  width: 250px;
+  width: clamp(130px, 25vw, 250px);
+  max-width: 45vw;
   margin: 10px 0;
   transition: width 0.4s ease;
 }
 
 .letter-window.final .cat {
-  width: 180px;
+  width: clamp(120px, 20vw, 180px);
 }
 
-/* buttons */
+/* Buttons */
+
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
+  gap: clamp(15px, 4vw, 30px);
   position: relative;
+  margin-top: 10px;
 }
 
 .no-wrapper {
@@ -104,14 +140,17 @@ p {
 }
 
 .btn {
-  width: 120px;
+  width: clamp(80px, 15vw, 120px);
+  max-width: 120px;
   cursor: pointer;
   user-select: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
 }
 
 .yes-btn,
 .no-btn {
-  width: 120px;
+  width: clamp(80px, 15vw, 120px);
   height: auto;
   display: inline-block;
 }
@@ -127,28 +166,47 @@ p {
   z-index: 1;
   position: relative;
   transition: transform 0.15s ease;
-  cursor: default;
+  cursor: pointer;
+}
+
+/* Final Section */
+
+#final-section {
+  text-align: center;
 }
 
 .final-text {
-  font-size: 22px;
+  font-size: clamp(16px, 3vw, 22px);
   line-height: 1.4;
   text-align: center;
   display: inline-block;
   padding: 10px 20px;
   background-color: rgba(255, 240, 240, 0.5);
   border-radius: 12px;
+  margin: 5px;
 }
+
 /* -------- Love Letter Page -------- */
+
 #love-letter-page {
   display: none;
   position: fixed;
   inset: 0;
+  width: 100%;
+  height: 100%;
+
   background-image: url("heart-bg.jpg");
   background-size: cover;
   background-position: center;
+
   justify-content: center;
   align-items: center;
+
+  padding: 20px;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
   animation: fadeInLetter 1s ease forwards;
 }
 
@@ -156,62 +214,189 @@ p {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
 .love-letter-box {
-  width: 90%;
-  max-width: 700px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 40px;
+  width: min(90%, 700px);
+  max-height: 90vh;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  padding: clamp(20px, 5vw, 40px);
+
   border-radius: 20px;
+
   text-align: center;
+
   box-shadow: 0 0 30px rgba(255, 100, 120, 0.3);
+
   animation: popUp 0.8s ease;
+
+  overflow-y: auto;
 }
 
 @keyframes popUp {
   from {
     transform: scale(0.8);
   }
+
   to {
     transform: scale(1);
   }
 }
 
 .love-letter-box h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
+  margin: 0 0 20px;
+  font-size: clamp(22px, 5vw, 28px);
+  line-height: 1.2;
 }
 
 .love-cat {
-  width: 150px;
-  margin-bottom: 20px;
+  width: clamp(100px, 30vw, 150px);
+  max-width: 40vw;
+  margin-bottom: 15px;
 }
 
 .letter-text p {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 15px;
+  font-size: clamp(15px, 3.5vw, 18px);
+  line-height: 1.55;
+  margin: 0 0 15px;
 }
 
 .signature {
   margin-top: 20px;
   font-weight: bold;
 }
+
+/* Open Letter Button */
+
 .open-letter-btn {
-  padding: 15px;
+  padding: 12px 15px;
   border-radius: 15px;
   border-style: dashed;
   border-color: maroon;
   width: 150px;
-  margin-top: 20px;
+  max-width: 80%;
+  margin-top: 15px;
   cursor: pointer;
+  font-family: "Pixelify Sans", sans-serif;
   transition: transform 0.3s ease;
 }
 
 .open-letter-btn:hover {
   transform: scale(1.1);
+}
+
+/* -------- Small Phones -------- */
+
+@media (max-width: 480px) {
+  #letter-container {
+    padding: 5px;
+  }
+
+  .letter-window {
+    width: 98vw;
+    min-height: 70vh;
+    aspect-ratio: auto;
+
+    padding: 120px 18px 25px;
+
+    background-size: 100% 100%;
+  }
+
+  h1 {
+    font-size: 21px;
+    max-width: 85%;
+  }
+
+  .cat {
+    width: 145px;
+    max-width: 40vw;
+    margin: 8px 0;
+  }
+
+  .buttons {
+    gap: 12px;
+    margin-top: 5px;
+  }
+
+  .yes-btn,
+  .no-btn {
+    width: 90px;
+  }
+
+  .final-text {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  #love-letter-page {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .love-letter-box {
+    width: 100%;
+    max-height: 94vh;
+    margin: 10px 0;
+    padding: 20px 17px;
+    border-radius: 16px;
+  }
+
+  .love-letter-box h2 {
+    font-size: 23px;
+    margin-bottom: 12px;
+  }
+
+  .love-cat {
+    width: 110px;
+    margin-bottom: 10px;
+  }
+
+  .letter-text p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 13px;
+  }
+
+  .signature {
+    margin-top: 15px;
+  }
+}
+
+/* -------- Very Small Phones -------- */
+
+@media (max-width: 360px) {
+  .letter-window {
+    padding-top: 105px;
+  }
+
+  h1 {
+    font-size: 19px;
+  }
+
+  .cat {
+    width: 120px;
+  }
+
+  .yes-btn,
+  .no-btn {
+    width: 78px;
+  }
+
+  .love-letter-box {
+    padding: 17px 14px;
+  }
+
+  .love-letter-box h2 {
+    font-size: 21px;
+  }
+
+  .letter-text p {
+    font-size: 14px;
+  }
 }
